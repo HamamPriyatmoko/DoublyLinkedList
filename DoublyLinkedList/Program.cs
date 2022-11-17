@@ -62,7 +62,7 @@ namespace DoublyLinkedList
                 }
             }
             /*On the execution of the above for loop. prev and
-            * current will point to those nodes
+             * current will point to those nodes
             between which the new node is to be inserted. */
             newnode.next = current;
             newnode.prev = previous;
@@ -76,6 +76,17 @@ namespace DoublyLinkedList
             }
             current.prev = newnode;
             previous.next = newnode;
+        }
+        /*Checks whether the specified node is present*/
+        public bool Search(int rollNo, ref Node previous, ref Node current)
+        {
+            for (previous = current = START; current != null &&
+                rollNo != current.rollNumber; previous = current,
+                current = current.next)
+            { }
+            /*The above for loop traverses the list. If the specified node
+            * is found then the function returns true, otherwise false.*/ 
+            return (current != null);
         }
     }
 
