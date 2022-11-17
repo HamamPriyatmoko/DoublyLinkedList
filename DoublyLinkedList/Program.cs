@@ -85,16 +85,81 @@ namespace DoublyLinkedList
                 current = current.next)
             { }
             /*The above for loop traverses the list. If the specified node
-            * is found then the function returns true, otherwise false.*/ 
+            * is found then the function returns true, otherwise false.*/
             return (current != null);
         }
-    }
-
-    internal class Program
-    {
+        public bool delNode(int rollNo)/*Deletes the specified node*/
+        {
+            Node previous, current;
+            previous = current = null;
+            if (Search(rollNo, ref previous, ref current) == false)
+                return false;
+            if (current ==  START)/*if the first node is to be deleted*/
+            {
+                START = START.next;
+                if (START != null)
+                    START.prev = null;
+                return true;
+            }
+            if (current.next == null)/*if the last node is to be deleted*/
+            {
+                previous.next = null;
+                return true;
+            }
+            /*If the node to be deleted is in between the list then the 
+              following lines of cbde is executed.*/
+            previous. next = current.next;
+            current.next.prev = previous;   
+            return true;
+        }
+        public void traverse()/*Traverses the list*/
+        {
+            if (listEmpty())
+                 Console.WriteLine("\nList is empty");
+            else
+            {
+                 Console.WriteLine("\nRecords in the ascending order of" +
+                        "roll numbers are:\n");
+                 Node currentNode;
+                 for (currentNode = START; currentNode != null; 
+                     currentNode = currentNode.next)
+                     Console.Write(currentNode.rollNumber + "  "
+                         + currentNode.name + "\n");
+            }
+        }
+        /*traverses the list in the reverse direction*/
+        public void revtraverse()
+        {
+            if (listEmpty())
+                Console.WriteLine("\nList is empty");
+            else
+            {
+                Console.WriteLine("\nRecords in the descending order of " +
+                    "roll numbers are:\n");
+                Node currentNode;
+                for (currentNode = START; currentNode.next != null;
+                    currentNode = currentNode.next)
+                { }
+                while (currentNode != null)
+                {
+                    Console.Write(currentNode.rollNumber + "  "
+                        + currentNode.name + "\n");
+                    currentNode = currentNode.prev;
+                }
+            }
+        }
+        public bool listEmpty()
+        {
+            if (START == null)
+                return true;
+            else
+                return false;
+        }
         static void Main(string[] args)
         {
+
         }
     }
+}
 
 
